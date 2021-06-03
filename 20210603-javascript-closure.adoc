@@ -1,0 +1,91 @@
+=== closure
+
+중첩된 함수는 외부 범위(scope)에서 선언한 변수에도 접근할 수 있다.  
+
+==== 어휘적 범위지정(Lexical scoping)
+
+
+
+[source,javascript]
+----
+function init() {
+  var name = 'junseok';
+  function display() {
+    console.log(name);
+  }
+  display();
+}
+
+init();
+----
+
+display 함수에서 사용된 name 변수는 display 외부에 선언한 변수인데도 접근해서 사용한 것을 알 수 있다.
+
+*output*
+[source,console]
+----
+junseok
+----
+
+*Question1*
+[source,javascript]
+----
+function init() {
+  var name = 'junseok';
+  function display() {
+    name = 'display';
+    console.log(this.name);
+  }
+  display();
+}
+
+init();
+----
+
+*output*
+[source,console]
+----
+display
+----
+
+*Question2*
+[source,javascript]
+----
+function init() {
+  var name = 'junseok';
+  function display() {
+    name = 'display';
+    console.log(name);
+  }
+  display();
+}
+
+init();
+----
+
+*output*
+[source,console]
+----
+junseok
+----
+
+*Question3*
+[source,javascript]
+----
+function init() {
+  var name = 'junseok';
+  function display() {
+    var name = 'display';
+    console.log(this.name);
+  }
+  display();
+}
+
+init();
+----
+
+*output*
+[source,console]
+----
+display
+----
